@@ -1,26 +1,24 @@
 package org.example.springwithhibernatetestapp;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import java.util.List;
 
 @RestController
 public class UserController {
 
 
     @GetMapping("/users")
-    public String getUsers() {
+    public List<User> getUsers() {
         SessionFactorySingleton sf = new SessionFactorySingleton();
         Session s = sf.getSession();
         s.getTransaction().begin();
         s.createQuery("from User").list().forEach(System.out::println);
         s.getTransaction().commit();
-        return s.createQuery("from User").list().toString();
+        return s.createQuery("from User").list();
     }
 
     @PostMapping("/user")

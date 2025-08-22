@@ -11,10 +11,10 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
         DataSourceTransactionManagerAutoConfiguration.class,
         HibernateJpaAutoConfiguration.class
 })
-public class SpringWithHibernateTestAppApplication {
+public class SpringWithHibernateMongoTestAppApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringWithHibernateTestAppApplication.class, args);
+        SpringApplication.run(SpringWithHibernateMongoTestAppApplication.class, args);
     }
 
 }
