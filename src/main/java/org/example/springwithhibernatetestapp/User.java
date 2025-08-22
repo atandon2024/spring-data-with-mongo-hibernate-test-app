@@ -1,15 +1,16 @@
 package org.example.springwithhibernatetestapp;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.UUID;
 
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
+
+    @Column
     private String name;
 
     public User() {
@@ -19,7 +20,11 @@ public class User {
         this.name = name;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 }
