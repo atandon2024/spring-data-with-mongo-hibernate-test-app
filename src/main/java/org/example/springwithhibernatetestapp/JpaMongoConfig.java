@@ -24,7 +24,6 @@ public class JpaMongoConfig {
         props.put("hibernate.connection.provider_class", "com.mongodb.hibernate.jdbc.MongoConnectionProvider");
         props.put("hibernate.dialect", "com.mongodb.hibernate.dialect.MongoDialect");
         props.put("jakarta.persistence.jdbc.url", "mongodb://127.0.0.1:27017/mongo-hibernate-test");
-        props.put("hibernate.mongo.database", "mongo-repo-test");
 
         emf.setJpaVendorAdapter(adapter);
         emf.setPackagesToScan("org.example.springwithhibernatetestapp");
