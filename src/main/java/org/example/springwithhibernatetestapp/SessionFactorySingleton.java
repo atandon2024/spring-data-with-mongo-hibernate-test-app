@@ -6,21 +6,28 @@ import org.hibernate.cfg.Configuration;
 
 public class SessionFactorySingleton {
 
-    private SessionFactory s;
+    private static final SessionFactory sessionFactory = buildSessionFactory();
 
-    public SessionFactorySingleton() {
-        SessionFactory f = new Configuration()
-                .addAnnotatedClass(User.class)
-                .configure()
-                .buildSessionFactory();
+    private SessionFactorySingleton() {} // private constructor
 
-        f.getStatistics().setStatisticsEnabled(true);
-        this.s = f;
+    private static SessionFactory buildSessionFactory() {
+        try {
+            SessionFactory f = new Configuration()
+                    .addAnnotatedClass(User.class)
+                    .configure()
+                    .buildSessionFactory();
+            f.getStatistics().setStatisticsEnabled(true);
+            return f;
+        } catch (Throwable ex) {
+            throw new ExceptionInInitializerError("Initial SessionFactory failed " + ex);
+        }
     }
 
-    public Session getSession() {
-        return s.openSession();
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 
-
+    public static Session getSession() {
+        return sessionFactory.openSession();
+    }
 }

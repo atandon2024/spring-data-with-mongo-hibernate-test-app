@@ -13,24 +13,24 @@ public class UserController {
 
     @GetMapping("/users")
     public List<User> getUsers() {
-        SessionFactorySingleton sf = new SessionFactorySingleton();
-        Session s = sf.getSession();
-        s.getTransaction().begin();
-        s.createQuery("from User").list().forEach(System.out::println);
+        Session s = SessionFactorySingleton.getSessionFactory().getCurrentSession();
+
+
+        s.beginTransaction();
+        List<User> users = s.createQuery("from User").list();
         s.getTransaction().commit();
-        return s.createQuery("from User").list();
+        return users;
     }
 
     @PostMapping("/user")
     public User createUser() {
-        SessionFactorySingleton sf = new SessionFactorySingleton();
+        Session s = SessionFactorySingleton.getSessionFactory().getCurrentSession();
 
-        User u = new User("Ajay");
-        Session s = sf.getSession();
-        s.getTransaction().begin();
+        s.beginTransaction();
+        User u = new User("test name");
         s.persist(u);
         s.getTransaction().commit();
-        System.out.println("User created: " + u);
+
         return u;
     }
 }
