@@ -8,7 +8,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+        DataSourceAutoConfiguration.class
+})
 @EnableJpaRepositories(basePackages = "org.example.springwithhibernatetestapp")
 @EntityScan(basePackages = "org.example.springwithhibernatetestapp")
 public class SpringWithHibernateMongoTestAppApplication {
